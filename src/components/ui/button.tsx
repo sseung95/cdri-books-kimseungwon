@@ -30,7 +30,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "inline-flex shrink-0 items-center justify-center gap-1 whitespace-nowrap",
+        "inline-flex shrink-0 items-center justify-center gap-1 whitespace-nowrap [&_svg]:shrink-0",
         "rounded-lg transition enabled:hover:brightness-95",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
         "disabled:cursor-not-allowed disabled:opacity-50",
