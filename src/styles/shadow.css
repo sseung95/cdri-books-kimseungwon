@@ -1,0 +1,5 @@
+/* Figma 기반 shadow 토큰: shadow-{name}으로 사용 */
+@theme {
+  --shadow-select: 0 0 4px 0 rgb(0 0 0 / 25%);
+  --shadow-popup: 0 4px 14px 6px rgb(151 151 151 / 15%);
+}

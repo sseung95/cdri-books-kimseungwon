@@ -1,7 +1,7 @@
 import { CloseIcon } from "@/components/icons/close-icon";
 import { SearchIcon } from "@/components/icons/search-icon";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+import { DetailSearch } from "./detail-search";
 
 interface SearchBarProps {
   histories?: string[];
@@ -52,9 +52,7 @@ export function SearchBar({ histories = [] }: SearchBarProps) {
           )}
         </div>
       </div>
-      <Button variant="outline" size="sm">
-        상세검색
-      </Button>
+      <DetailSearch />
     </div>
   );
 }
