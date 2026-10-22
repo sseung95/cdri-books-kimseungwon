@@ -1,0 +1,15 @@
+/* Preflight가 처리하지 않는 브라우저 기본 스타일 초기화 */
+@layer base {
+  body {
+    @apply bg-white font-sans text-text-primary antialiased;
+    word-break: keep-all;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  input {
+    outline: none;
+  }
+}

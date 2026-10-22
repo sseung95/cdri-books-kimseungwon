@@ -1,0 +1,4 @@
+/* next/font로 주입한 CSS 변수를 기본 sans 폰트로 사용 */
+@theme inline {
+  --font-sans: var(--font-noto-sans-kr), sans-serif;
+}

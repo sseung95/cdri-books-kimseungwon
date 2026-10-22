@@ -1,0 +1,13 @@
+/* Figma 기반 color 토큰: text-{name}, bg-{name}, border-{name} 등으로 사용 */
+@theme {
+  --color-primary: #4880ee;
+  --color-red: #e84118;
+  --color-gray: #dadada;
+  --color-light-gray: #f2f4f6;
+  --color-white: #ffffff;
+  --color-black: #222222;
+
+  --color-text-primary: #353c49;
+  --color-text-secondary: #6d7582;
+  --color-text-subtitle: #8d94a0;
+}

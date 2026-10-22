@@ -1,0 +1,52 @@
+/*
+ * Figma 기반 typography: typo-{name} 하나로 font-size, line-height, font-weight 적용
+ * line-height, font-weight는 Tailwind 변수를 우선 참조해 leading-*, font-*로 덮어쓸 수 있다.
+ * 토큰을 추가·변경하면 src/lib/cn.ts의 tailwind-merge 목록도 함께 수정한다.
+ */
+@utility typo-title1 {
+  font-size: 24px;
+  line-height: var(--tw-leading, 24px);
+  font-weight: var(--tw-font-weight, 700);
+}
+
+@utility typo-title2 {
+  font-size: 22px;
+  line-height: var(--tw-leading, 24px);
+  font-weight: var(--tw-font-weight, 700);
+}
+
+@utility typo-title3 {
+  font-size: 18px;
+  line-height: var(--tw-leading, 18px);
+  font-weight: var(--tw-font-weight, 700);
+}
+
+@utility typo-body1 {
+  font-size: 20px;
+  line-height: var(--tw-leading, 20px);
+  font-weight: var(--tw-font-weight, 500);
+}
+
+@utility typo-body2 {
+  font-size: 14px;
+  line-height: var(--tw-leading, 14px);
+  font-weight: var(--tw-font-weight, 500);
+}
+
+@utility typo-body2-bold {
+  font-size: 14px;
+  line-height: var(--tw-leading, 14px);
+  font-weight: var(--tw-font-weight, 700);
+}
+
+@utility typo-caption {
+  font-size: 16px;
+  line-height: var(--tw-leading, 16px);
+  font-weight: var(--tw-font-weight, 500);
+}
+
+@utility typo-small {
+  font-size: 10px;
+  line-height: var(--tw-leading, 10px);
+  font-weight: var(--tw-font-weight, 500);
+}
