@@ -2,6 +2,7 @@
 
 @import "./color.css";
 @import "./shadow.css";
+@import "./breakpoint.css";
 @import "./typography.css";
 @import "./font.css";
 @import "./base.css";
