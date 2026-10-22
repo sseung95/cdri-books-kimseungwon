@@ -4,16 +4,18 @@ import { formatPrice } from "@/lib/format";
 import type { Book } from "@/types/book";
 import { BookThumbnail } from "./book-thumbnail";
 import { DetailToggleButton } from "./detail-toggle-button";
+import { LikeButton } from "./like-button";
 
 interface BookDetailProps {
   book: Book;
+  isLiked: boolean;
   onToggle: () => void;
 }
 
 // 펼친 상태.
 // 모바일: [썸네일 | 제목·저자] / 책 소개 / 가격 / [구매하기 | 상세보기]
 // desktop(960px) 이상: [썸네일] [제목·저자, 책 소개] [상세보기 … 가격, 구매하기]
-export function BookDetail({ book, onToggle }: BookDetailProps) {
+export function BookDetail({ book, isLiked, onToggle }: BookDetailProps) {
   return (
     <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-5 p-4 desktop:flex desktop:gap-0 desktop:pt-6 desktop:pb-10 desktop:pl-13.5">
       <BookThumbnail
@@ -21,7 +23,12 @@ export function BookDetail({ book, onToggle }: BookDetailProps) {
         alt={book.title}
         sizes="(min-width: 960px) 210px, 96px"
         className="h-34 w-24 desktop:mr-8 desktop:h-70 desktop:w-52.5"
-      />
+      >
+        <LikeButton
+          isLiked={isLiked}
+          className="top-1 right-1 size-5 desktop:top-2 desktop:right-2 desktop:size-6"
+        />
+      </BookThumbnail>
 
       {/* 모바일에서는 contents로 감싼 요소를 없애 자식들이 바로 그리드 칸에 놓이게 한다. */}
       <div className="contents desktop:flex desktop:w-90 desktop:flex-col desktop:pt-5">

@@ -7,18 +7,19 @@ import { BookSummary } from "./book-summary";
 
 interface BookListItemProps {
   book: Book;
+  isLiked?: boolean;
 }
 
-export function BookListItem({ book }: BookListItemProps) {
+export function BookListItem({ book, isLiked = false }: BookListItemProps) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
 
   return (
     <li className="border-b border-gray">
       {isOpen ? (
-        <BookDetail book={book} onToggle={toggle} />
+        <BookDetail book={book} isLiked={isLiked} onToggle={toggle} />
       ) : (
-        <BookSummary book={book} onToggle={toggle} />
+        <BookSummary book={book} isLiked={isLiked} onToggle={toggle} />
       )}
     </li>
   );
