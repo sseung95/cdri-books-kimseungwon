@@ -66,7 +66,13 @@ interface BookPriceProps {
 }
 
 function BookPrice({ price, salePrice, className }: BookPriceProps) {
-  const hasSale = salePrice !== null;
+  if (salePrice === null) {
+    return (
+      <p className={cn("text-right typo-title3 leading-6.5", className)}>
+        {formatPrice(price)}
+      </p>
+    );
+  }
 
   return (
     // 라벨은 라벨끼리, 가격은 가격끼리 같은 열에 오도록 2열 그리드로 배치한다.
@@ -77,24 +83,21 @@ function BookPrice({ price, salePrice, className }: BookPriceProps) {
       )}
     >
       <div className="contents">
-        <dt className="text-right typo-small text-text-subtitle">원가</dt>
-        <dd
-          className={cn(
-            "text-right typo-title3 leading-6.5",
-            hasSale && "font-light line-through",
-          )}
-        >
+        <dt className="translate-y-px text-right typo-small text-text-subtitle">
+          원가
+        </dt>
+        <dd className="text-right typo-title3 leading-6.5 font-light line-through">
           {formatPrice(price)}
         </dd>
       </div>
-      {hasSale && (
-        <div className="contents">
-          <dt className="text-right typo-small text-text-subtitle">할인가</dt>
-          <dd className="text-right typo-title3 leading-6.5">
-            {formatPrice(salePrice)}
-          </dd>
-        </div>
-      )}
+      <div className="contents">
+        <dt className="translate-y-px text-right typo-small text-text-subtitle">
+          할인가
+        </dt>
+        <dd className="text-right typo-title3 leading-6.5">
+          {formatPrice(salePrice)}
+        </dd>
+      </div>
     </dl>
   );
 }
