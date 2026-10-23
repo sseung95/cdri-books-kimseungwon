@@ -1,4 +1,4 @@
-import { formatPrice } from "@/lib/format";
+import { formatAuthors, formatPrice } from "@/lib/format";
 import type { Book } from "@/types/book";
 import { BookThumbnail } from "./book-thumbnail";
 import { BuyLink } from "./buy-link";
@@ -26,14 +26,11 @@ export function BookSummary({ book, isLiked, onToggle }: BookSummaryProps) {
 
       <div className="flex min-w-0 flex-col gap-2 desktop:flex-1 desktop:flex-row desktop:items-center desktop:gap-5.5">
         <div className="flex min-w-0 flex-col gap-1 desktop:flex-1 desktop:flex-row desktop:items-center desktop:gap-4">
-          <h3
-            title={book.title}
-            className="line-clamp-2 typo-title3 leading-6 desktop:truncate"
-          >
+          <h3 title={book.title} className="line-clamp-2 typo-title3 leading-6">
             {book.title}
           </h3>
           <p className="truncate typo-body2 leading-5 text-text-secondary desktop:shrink-0">
-            {book.authors.join(", ")}
+            {formatAuthors(book.authors)}
           </p>
         </div>
         <SummaryPrice price={book.salePrice ?? book.price} />
