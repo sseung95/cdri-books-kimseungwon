@@ -15,8 +15,8 @@ export const bookKeys = {
 export function useBookSearch(filter: BookSearchFilter) {
   return useInfiniteQuery({
     queryKey: bookKeys.search(filter),
-    queryFn: ({ pageParam }) =>
-      searchBooks({ ...filter, page: pageParam, size: PAGE_SIZE }),
+    queryFn: ({ pageParam, signal }) =>
+      searchBooks({ ...filter, page: pageParam, size: PAGE_SIZE }, signal),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) =>
       lastPage.meta.isEnd ? undefined : lastPageParam + 1,

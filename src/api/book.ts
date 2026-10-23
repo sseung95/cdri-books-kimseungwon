@@ -29,12 +29,16 @@ function toBook({ price, sale_price, ...book }: KakaoBook): Book {
   };
 }
 
+/**
+ * @param signal 요청 취소용. 검색어가 바뀌어 필요 없어진 요청을 React Query가 취소한다.
+ */
 export async function searchBooks(
   params: BookSearchParams,
+  signal?: AbortSignal,
 ): Promise<BookSearchResult> {
   const { data } = await kakaoClient.get<KakaoBookSearchResponse>(
     "/v3/search/book",
-    { params },
+    { params, signal },
   );
 
   return {
