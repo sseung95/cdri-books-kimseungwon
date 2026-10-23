@@ -10,10 +10,16 @@ interface BookSummaryProps {
   book: Book;
   isLiked: boolean;
   onToggle: () => void;
+  onLikeToggle: () => void;
 }
 
 // 접힌 상태. 모바일: [썸네일 | 제목·저자·가격] 아래 줄에 버튼. desktop(960px) 이상: 한 줄
-export function BookSummary({ book, isLiked, onToggle }: BookSummaryProps) {
+export function BookSummary({
+  book,
+  isLiked,
+  onToggle,
+  onLikeToggle,
+}: BookSummaryProps) {
   return (
     <div className="grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-3 p-4 desktop:flex desktop:gap-0 desktop:pl-12">
       <BookThumbnail
@@ -22,7 +28,11 @@ export function BookSummary({ book, isLiked, onToggle }: BookSummaryProps) {
         sizes="48px"
         className="h-17 w-12 desktop:mr-12"
       >
-        <LikeButton isLiked={isLiked} className="top-0 right-0 size-4" />
+        <LikeButton
+          isLiked={isLiked}
+          onClick={onLikeToggle}
+          className="top-0 right-0 size-4"
+        />
       </BookThumbnail>
 
       <div className="flex min-w-0 flex-col gap-2 desktop:flex-1 desktop:flex-row desktop:items-center desktop:gap-5.5">

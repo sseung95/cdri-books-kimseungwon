@@ -10,12 +10,18 @@ interface BookDetailProps {
   book: Book;
   isLiked: boolean;
   onToggle: () => void;
+  onLikeToggle: () => void;
 }
 
 // 펼친 상태.
 // 모바일: [썸네일 | 제목·저자] / 책 소개 / 가격 / [구매하기 | 상세보기]
 // desktop(960px) 이상: [썸네일] [제목·저자, 책 소개] [상세보기 … 가격, 구매하기]
-export function BookDetail({ book, isLiked, onToggle }: BookDetailProps) {
+export function BookDetail({
+  book,
+  isLiked,
+  onToggle,
+  onLikeToggle,
+}: BookDetailProps) {
   return (
     <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-5 p-4 desktop:flex desktop:gap-0 desktop:pt-6 desktop:pb-10 desktop:pl-13.5">
       <BookThumbnail
@@ -26,6 +32,7 @@ export function BookDetail({ book, isLiked, onToggle }: BookDetailProps) {
       >
         <LikeButton
           isLiked={isLiked}
+          onClick={onLikeToggle}
           className="top-1 right-1 size-5 desktop:top-2 desktop:right-2 desktop:size-6"
         />
       </BookThumbnail>
