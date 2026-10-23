@@ -1,10 +1,10 @@
 import { cn } from "@/lib/cn";
-import { formatPrice } from "@/lib/format";
 import type { Book } from "@/types/book";
 import { BookThumbnail } from "./book-thumbnail";
 import { BuyLink } from "./buy-link";
 import { DetailToggleButton } from "./detail-toggle-button";
 import { LikeButton } from "./like-button";
+import { PriceValue } from "./price-value";
 
 interface BookDetailProps {
   book: Book;
@@ -79,23 +79,9 @@ interface BookPriceProps {
   className?: string;
 }
 
+// 원가·할인가를 항상 함께 보여주고, 값이 없으면 "-"로 표시한다.
 function BookPrice({ price, salePrice, className }: BookPriceProps) {
-  const singlePrice = salePrice ?? price;
-  if (singlePrice === null) {
-    return (
-      <p className={cn("text-right typo-body2 text-text-subtitle", className)}>
-        가격 정보 없음
-      </p>
-    );
-  }
-  // 둘 중 하나만 있으면 비교할 가격이 없으니 그 가격만 보여준다.
-  if (price === null || salePrice === null) {
-    return (
-      <p className={cn("text-right typo-title3 leading-6.5", className)}>
-        {formatPrice(singlePrice)}
-      </p>
-    );
-  }
+  const isDiscounted = price !== null && salePrice !== null;
 
   return (
     // 라벨은 라벨끼리, 가격은 가격끼리 같은 열에 오도록 2열 그리드로 배치한다.
@@ -109,8 +95,13 @@ function BookPrice({ price, salePrice, className }: BookPriceProps) {
         <dt className="translate-y-px text-right typo-small text-text-subtitle">
           원가
         </dt>
-        <dd className="text-right typo-title3 leading-6.5 font-light line-through">
-          {formatPrice(price)}
+        <dd
+          className={cn(
+            "text-right typo-title3 leading-6.5",
+            isDiscounted && "font-light line-through",
+          )}
+        >
+          <PriceValue price={price} />
         </dd>
       </div>
       <div className="contents">
@@ -118,7 +109,7 @@ function BookPrice({ price, salePrice, className }: BookPriceProps) {
           할인가
         </dt>
         <dd className="text-right typo-title3 leading-6.5">
-          {formatPrice(salePrice)}
+          <PriceValue price={salePrice} />
         </dd>
       </div>
     </dl>

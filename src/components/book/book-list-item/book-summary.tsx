@@ -1,9 +1,10 @@
-import { formatAuthors, formatPrice } from "@/lib/format";
+import { formatAuthors } from "@/lib/format";
 import type { Book } from "@/types/book";
 import { BookThumbnail } from "./book-thumbnail";
 import { BuyLink } from "./buy-link";
 import { DetailToggleButton } from "./detail-toggle-button";
 import { LikeButton } from "./like-button";
+import { PriceValue } from "./price-value";
 
 interface BookSummaryProps {
   book: Book;
@@ -33,7 +34,10 @@ export function BookSummary({ book, isLiked, onToggle }: BookSummaryProps) {
             {formatAuthors(book.authors)}
           </p>
         </div>
-        <SummaryPrice price={book.salePrice ?? book.price} />
+        {/* 할인가(판매가)가 없으면 지금 살 수 있는 가격을 알 수 없어 정가 대신 "-"로 표시한다. */}
+        <p className="shrink-0 typo-title3">
+          <PriceValue price={book.salePrice} />
+        </p>
       </div>
 
       <div className="col-span-2 flex gap-2 desktop:ml-14 desktop:shrink-0">
@@ -49,13 +53,4 @@ export function BookSummary({ book, isLiked, onToggle }: BookSummaryProps) {
       </div>
     </div>
   );
-}
-
-function SummaryPrice({ price }: { price: number | null }) {
-  if (price === null) {
-    return (
-      <p className="shrink-0 typo-body2 text-text-subtitle">가격 정보 없음</p>
-    );
-  }
-  return <p className="shrink-0 typo-title3">{formatPrice(price)}</p>;
 }
