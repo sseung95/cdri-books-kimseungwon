@@ -10,7 +10,7 @@ import { useLikedBooks } from "@/hooks/use-liked-books";
 const PAGE_SIZE = 10;
 
 export function LikedBookResult() {
-  const { likedBooks } = useLikedBooks();
+  const likedBooks = useLikedBooks();
   const isClient = useIsClient();
   // 찜 목록은 이미 모두 저장되어 있어서, 보여줄 개수만 늘려 가며 무한 스크롤한다.
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);

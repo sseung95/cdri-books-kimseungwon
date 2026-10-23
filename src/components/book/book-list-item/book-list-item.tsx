@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useLikedBooks } from "@/hooks/use-liked-books";
+import { useBookLike } from "@/hooks/use-liked-books";
 import type { Book } from "@/types/book";
 import { BookDetail } from "./book-detail";
 import { BookSummary } from "./book-summary";
@@ -11,7 +11,7 @@ interface BookListItemProps {
 }
 
 export function BookListItem({ book }: BookListItemProps) {
-  const { isLiked, toggle: toggleLike } = useLikedBooks();
+  const { isLiked, toggle: toggleLike } = useBookLike(book);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
 
@@ -20,16 +20,16 @@ export function BookListItem({ book }: BookListItemProps) {
       {isOpen ? (
         <BookDetail
           book={book}
-          isLiked={isLiked(book)}
+          isLiked={isLiked}
           onToggle={toggle}
-          onLikeToggle={() => toggleLike(book)}
+          onLikeToggle={toggleLike}
         />
       ) : (
         <BookSummary
           book={book}
-          isLiked={isLiked(book)}
+          isLiked={isLiked}
           onToggle={toggle}
-          onLikeToggle={() => toggleLike(book)}
+          onLikeToggle={toggleLike}
         />
       )}
     </li>

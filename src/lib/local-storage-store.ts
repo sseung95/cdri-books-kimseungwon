@@ -54,7 +54,17 @@ export function createLocalStorageStore<T>(
   return { get, set, subscribe, fallback };
 }
 
-/** 서버 렌더링 때는 localStorage가 없으므로 기본값으로 그린다. */
-export function useLocalStorageStore<T>(store: LocalStorageStore<T>) {
-  return useSyncExternalStore(store.subscribe, store.get, () => store.fallback);
+/**
+ * 저장소 값을 구독한다. 서버 렌더링 때는 localStorage가 없으므로 기본값으로 그린다.
+ * select를 넘기면 고른 값이 바뀔 때만 다시 그린다. (예: 목록 전체 대신 "이 항목이 있는지")
+ */
+export function useLocalStorageStore<T, S = T>(
+  store: LocalStorageStore<T>,
+  select: (value: T) => S = (value) => value as unknown as S,
+) {
+  return useSyncExternalStore(
+    store.subscribe,
+    () => select(store.get()),
+    () => select(store.fallback),
+  );
 }

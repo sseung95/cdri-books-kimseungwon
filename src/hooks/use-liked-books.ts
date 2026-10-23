@@ -20,22 +20,33 @@ const likedBooksStore = createLocalStorageStore<Book[]>(
   (value) => (Array.isArray(value) ? value.filter(isBook) : null),
 );
 
+/** 책은 url(bookId 포함)로 구분한다. isbn은 잡지 호(號)끼리 겹치는 경우가 있다. */
+function hasBook(books: Book[], book: Book) {
+  return books.some((liked) => liked.url === book.url);
+}
+
+/** 찜하지 않은 책이면 맨 앞에 추가하고, 찜한 책이면 해제한다. */
+function toggleLikedBook(book: Book) {
+  const current = likedBooksStore.get();
+  likedBooksStore.set(
+    hasBook(current, book)
+      ? current.filter((liked) => liked.url !== book.url)
+      : [book, ...current],
+  );
+}
+
+/** 찜 목록 전체 (찜 목록 페이지용) */
 export function useLikedBooks() {
-  const likedBooks = useLocalStorageStore(likedBooksStore);
+  return useLocalStorageStore(likedBooksStore);
+}
 
-  // 책은 url(bookId 포함)로 구분한다. isbn은 잡지 호(號)끼리 겹치는 경우가 있다.
-  const isLiked = (book: Book) =>
-    likedBooks.some((liked) => liked.url === book.url);
-
-  // 찜하지 않은 책이면 맨 앞에 추가하고, 찜한 책이면 해제한다.
-  const toggle = (book: Book) => {
-    const current = likedBooksStore.get();
-    likedBooksStore.set(
-      current.some((liked) => liked.url === book.url)
-        ? current.filter((liked) => liked.url !== book.url)
-        : [book, ...current],
-    );
-  };
-
-  return { likedBooks, isLiked, toggle };
+/**
+ * 책 한 권의 찜 여부 (리스트 아이템용).
+ * 목록 전체가 아니라 이 책의 찜 여부만 구독해서, 다른 책을 찜해도 다시 그려지지 않는다.
+ */
+export function useBookLike(book: Book) {
+  const isLiked = useLocalStorageStore(likedBooksStore, (books) =>
+    hasBook(books, book),
+  );
+  return { isLiked, toggle: () => toggleLikedBook(book) };
 }
