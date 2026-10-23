@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { BookIcon } from "@/components/icons/book-icon";
 import { cn } from "@/lib/cn";
 
 interface BookThumbnailProps {
@@ -19,16 +22,25 @@ export function BookThumbnail({
   className,
   children,
 }: BookThumbnailProps) {
+  // 주소는 있지만 불러오지 못한 이미지. src가 바뀌면 다시 시도한다.
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const hasImage = src !== "" && failedSrc !== src;
+
   return (
     <div className={cn("relative shrink-0 bg-light-gray", className)}>
-      {src && (
+      {hasImage ? (
         <Image
           src={src}
           alt={alt}
           fill
           sizes={sizes}
+          onError={() => setFailedSrc(src)}
           className="object-cover"
         />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <BookIcon className="aspect-square h-auto w-2/5 text-ui-gray" />
+        </div>
       )}
       {children}
     </div>

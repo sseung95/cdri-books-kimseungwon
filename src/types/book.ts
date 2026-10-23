@@ -22,7 +22,8 @@ export interface Book {
   authors: string[];
   publisher: string;
   translators: string[];
-  price: number;
+  /** 가격 정보가 없으면 null */
+  price: number | null;
   /** 할인가가 없으면 null */
   salePrice: number | null;
   thumbnail: string;

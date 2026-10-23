@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
 import type { Book } from "@/types/book";
 import { BookThumbnail } from "./book-thumbnail";
+import { BuyLink } from "./buy-link";
 import { DetailToggleButton } from "./detail-toggle-button";
 import { LikeButton } from "./like-button";
 
@@ -36,15 +36,14 @@ export function BookSummary({ book, isLiked, onToggle }: BookSummaryProps) {
             {book.authors.join(", ")}
           </p>
         </div>
-        <p className="shrink-0 typo-title3">
-          {formatPrice(book.salePrice ?? book.price)}
-        </p>
+        <SummaryPrice price={book.salePrice ?? book.price} />
       </div>
 
       <div className="col-span-2 flex gap-2 desktop:ml-14 desktop:shrink-0">
-        <Button className="flex-1 desktop:w-28.75 desktop:flex-none">
-          구매하기
-        </Button>
+        <BuyLink
+          url={book.url}
+          className="flex-1 desktop:w-28.75 desktop:flex-none"
+        />
         <DetailToggleButton
           isOpen={false}
           onClick={onToggle}
@@ -53,4 +52,13 @@ export function BookSummary({ book, isLiked, onToggle }: BookSummaryProps) {
       </div>
     </div>
   );
+}
+
+function SummaryPrice({ price }: { price: number | null }) {
+  if (price === null) {
+    return (
+      <p className="shrink-0 typo-body2 text-text-subtitle">가격 정보 없음</p>
+    );
+  }
+  return <p className="shrink-0 typo-title3">{formatPrice(price)}</p>;
 }

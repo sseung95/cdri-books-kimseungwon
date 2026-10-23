@@ -3,7 +3,9 @@ import type { Book, BookSearchParams, BookSearchResult } from "@/types/book";
 
 // 카카오 책 검색 API 응답 형식
 // https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-book
-interface KakaoBook extends Omit<Book, "salePrice"> {
+interface KakaoBook extends Omit<Book, "price" | "salePrice"> {
+  /** 가격 정보가 없으면 0 */
+  price: number;
   /** 할인가가 없으면 -1 */
   sale_price: number;
 }
@@ -17,8 +19,12 @@ interface KakaoBookSearchResponse {
   documents: KakaoBook[];
 }
 
-function toBook({ sale_price, ...book }: KakaoBook): Book {
-  return { ...book, salePrice: sale_price < 0 ? null : sale_price };
+function toBook({ price, sale_price, ...book }: KakaoBook): Book {
+  return {
+    ...book,
+    price: price > 0 ? price : null,
+    salePrice: sale_price > 0 ? sale_price : null,
+  };
 }
 
 export async function searchBooks(

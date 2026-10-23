@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
 import type { Book } from "@/types/book";
 import { BookThumbnail } from "./book-thumbnail";
+import { BuyLink } from "./buy-link";
 import { DetailToggleButton } from "./detail-toggle-button";
 import { LikeButton } from "./like-button";
 
@@ -32,7 +32,7 @@ export function BookDetail({ book, isLiked, onToggle }: BookDetailProps) {
 
       {/* 모바일에서는 contents로 감싼 요소를 없애 자식들이 바로 그리드 칸에 놓이게 한다. */}
       <div className="contents desktop:flex desktop:w-90 desktop:flex-col desktop:pt-5">
-        <div className="flex flex-col gap-1 self-center desktop:flex-row desktop:items-center desktop:gap-4">
+        <div className="flex flex-col gap-1 self-center desktop:flex-row desktop:items-center desktop:gap-4 desktop:self-start">
           <h3 className="typo-title3 leading-6.5">{book.title}</h3>
           <p className="typo-body2 leading-5 text-text-secondary">
             {book.authors.join(", ")}
@@ -40,9 +40,15 @@ export function BookDetail({ book, isLiked, onToggle }: BookDetailProps) {
         </div>
         <section className="col-span-2 desktop:mt-4">
           <h4 className="typo-body2-bold leading-6.5">책 소개</h4>
-          <p className="mt-3 typo-small leading-4 whitespace-pre-line">
-            {book.contents}
-          </p>
+          {book.contents.trim() ? (
+            <p className="mt-3 typo-small leading-4 whitespace-pre-line">
+              {book.contents}
+            </p>
+          ) : (
+            <p className="mt-3 typo-small leading-4 text-text-subtitle">
+              책 소개가 없습니다.
+            </p>
+          )}
         </section>
       </div>
 
@@ -58,25 +64,35 @@ export function BookDetail({ book, isLiked, onToggle }: BookDetailProps) {
           salePrice={book.salePrice}
           className="order-1 w-full desktop:order-2 desktop:mt-auto"
         />
-        <Button className="order-2 flex-1 desktop:order-3 desktop:mt-7 desktop:w-full desktop:flex-none">
-          구매하기
-        </Button>
+        <BuyLink
+          url={book.url}
+          className="order-2 flex-1 desktop:order-3 desktop:mt-7 desktop:w-full desktop:flex-none"
+        />
       </div>
     </div>
   );
 }
 
 interface BookPriceProps {
-  price: number;
+  price: number | null;
   salePrice: number | null;
   className?: string;
 }
 
 function BookPrice({ price, salePrice, className }: BookPriceProps) {
-  if (salePrice === null) {
+  const singlePrice = salePrice ?? price;
+  if (singlePrice === null) {
+    return (
+      <p className={cn("text-right typo-body2 text-text-subtitle", className)}>
+        가격 정보 없음
+      </p>
+    );
+  }
+  // 둘 중 하나만 있으면 비교할 가격이 없으니 그 가격만 보여준다.
+  if (price === null || salePrice === null) {
     return (
       <p className={cn("text-right typo-title3 leading-6.5", className)}>
-        {formatPrice(price)}
+        {formatPrice(singlePrice)}
       </p>
     );
   }
