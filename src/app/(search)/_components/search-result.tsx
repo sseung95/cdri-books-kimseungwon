@@ -1,5 +1,6 @@
 "use client";
 
+import { BookListSkeleton } from "@/components/book/book-list-skeleton";
 import { BookResult } from "@/components/book/book-result";
 import { useBookSearch } from "@/queries/book";
 
@@ -11,7 +12,15 @@ export function SearchResult({ query }: SearchResultProps) {
   const { data, isLoading, isError } = useBookSearch({ query });
 
   if (isLoading) {
-    return <SearchMessage>검색 중입니다...</SearchMessage>;
+    return (
+      <div role="status" className="mt-6">
+        <span className="sr-only">검색 중입니다</span>
+        <div className="h-6 w-40 rounded bg-light-gray motion-safe:animate-pulse" />
+        <div className="mt-9">
+          <BookListSkeleton />
+        </div>
+      </div>
+    );
   }
   if (isError) {
     return (
