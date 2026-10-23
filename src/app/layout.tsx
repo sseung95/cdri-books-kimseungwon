@@ -20,7 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <QueryProvider>
           <Header />
-          <main className="pt-20">
+          <main className="pt-20 pb-20">
             <Container>{children}</Container>
           </main>
         </QueryProvider>
