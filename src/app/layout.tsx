@@ -11,7 +11,12 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "CDRI Books",
+  title: {
+    default: "CERTICOS BOOKS",
+    // 하위 페이지는 "도서 검색 | CERTICOS BOOKS" 형태가 된다.
+    template: "%s | CERTICOS BOOKS",
+  },
+  description: "카카오 책 검색 API로 도서를 검색하고 찜할 수 있는 서비스",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

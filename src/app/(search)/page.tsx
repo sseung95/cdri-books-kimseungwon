@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import {
   SearchContent,
   SearchContentFromUrl,
 } from "./_components/search-content";
+
+export const metadata: Metadata = {
+  title: "도서 검색",
+};
 
 export default function SearchPage() {
   return (
