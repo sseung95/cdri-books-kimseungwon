@@ -25,8 +25,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="ko" className={notoSansKr.variable}>
       <body>
         <QueryProvider>
+          {/* 키보드 사용자가 헤더를 건너뛰고 본문으로 가는 링크. Tab으로 포커스될 때만 보인다. */}
+          <a
+            href="#main"
+            className="sr-only rounded-lg bg-primary px-4 py-2 typo-body2 text-white focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50"
+          >
+            본문으로 바로가기
+          </a>
           <Header />
-          <main className="pt-20 pb-20">
+          {/* tabIndex={-1}: 링크로 이동했을 때 본문에 포커스가 옮겨가도록 한다. */}
+          <main id="main" tabIndex={-1} className="pt-20 pb-20 outline-none">
             <Container>{children}</Container>
           </main>
           <ScrollToTopButton />
