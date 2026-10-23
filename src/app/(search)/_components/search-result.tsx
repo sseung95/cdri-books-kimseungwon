@@ -2,6 +2,7 @@
 
 import { BookListSkeleton } from "@/components/book/book-list-skeleton";
 import { BookResult } from "@/components/book/book-result";
+import { BookResultSkeleton } from "@/components/book/book-result-skeleton";
 import { Button } from "@/components/ui/button";
 import { InfiniteScrollTrigger } from "@/components/ui/infinite-scroll-trigger";
 import { useBookSearch } from "@/queries/book";
@@ -24,15 +25,7 @@ export function SearchResult({ query, target }: SearchResultProps) {
   } = useBookSearch({ query, target });
 
   if (isLoading) {
-    return (
-      <div role="status" className="mt-6">
-        <span className="sr-only">검색 중입니다</span>
-        <div className="h-6 w-40 rounded bg-light-gray motion-safe:animate-pulse" />
-        <div className="mt-9">
-          <BookListSkeleton />
-        </div>
-      </div>
-    );
+    return <BookResultSkeleton message="검색 중입니다" />;
   }
   // 다음 페이지만 실패한 경우는 아래에서 다시 시도 버튼으로 처리한다.
   if (isError && !isFetchNextPageError) {
