@@ -13,7 +13,7 @@ interface BookSummaryProps {
   onLikeToggle: () => void;
 }
 
-// 접힌 상태. 모바일: [썸네일 | 제목·저자·가격] 아래 줄에 버튼. desktop(960px) 이상: 한 줄
+/** 접힌 상태. 모바일: [썸네일 | 제목·저자·가격] 아래 줄에 버튼. desktop(960px) 이상: 한 줄 */
 export function BookSummary({
   book,
   isLiked,

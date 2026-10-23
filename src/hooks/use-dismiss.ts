@@ -1,6 +1,6 @@
 import { useEffect, useRef, type RefObject } from "react";
 
-// 열려 있는 동안 ref 바깥을 누르거나 Escape를 누르면 onDismiss를 호출한다.
+/** 열려 있는 동안 ref 바깥을 누르거나 Escape를 누르면 onDismiss를 호출한다. */
 export function useDismiss(
   ref: RefObject<HTMLElement | null>,
   isOpen: boolean,

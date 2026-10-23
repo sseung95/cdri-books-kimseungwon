@@ -13,9 +13,11 @@ interface BookDetailProps {
   onLikeToggle: () => void;
 }
 
-// 펼친 상태.
-// 모바일: [썸네일 | 제목·저자] / 책 소개 / 가격 / [구매하기 | 상세보기]
-// desktop(960px) 이상: [썸네일] [제목·저자, 책 소개] [상세보기 … 가격, 구매하기]
+/**
+ * 펼친 상태.
+ * 모바일: [썸네일 | 제목·저자] / 책 소개 / 가격 / [구매하기 | 상세보기]
+ * desktop(960px) 이상: [썸네일] [제목·저자, 책 소개] [상세보기 … 가격, 구매하기]
+ */
 export function BookDetail({
   book,
   isLiked,
@@ -86,7 +88,7 @@ interface BookPriceProps {
   className?: string;
 }
 
-// 원가·할인가를 항상 함께 보여주고, 값이 없으면 "-"로 표시한다.
+/** 원가·할인가를 항상 함께 보여주고, 값이 없으면 "-"로 표시한다. */
 function BookPrice({ price, salePrice, className }: BookPriceProps) {
   const isDiscounted = price !== null && salePrice !== null;
 

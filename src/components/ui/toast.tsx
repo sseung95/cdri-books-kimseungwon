@@ -10,7 +10,7 @@ interface ToastItem {
   message: string;
 }
 
-// 컴포넌트 밖(React Query 전역 에러 처리 등)에서도 띄울 수 있도록 모듈 단위로 관리한다.
+/** 컴포넌트 밖(React Query 전역 에러 처리 등)에서도 띄울 수 있도록 모듈 단위로 관리한다. */
 let toasts: ToastItem[] = [];
 let nextId = 0;
 const listeners = new Set<() => void>();

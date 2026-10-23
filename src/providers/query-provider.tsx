@@ -11,7 +11,7 @@ import { useState, type ReactNode } from "react";
 import { resolveErrorMessage } from "@/api/error/resolve-error-message";
 import { showToast, Toaster } from "@/components/ui/toast";
 
-// query·mutation 에러를 한 곳에서 처리한다.
+/** query·mutation 에러를 한 곳에서 처리한다. */
 function createQueryClient(showError: (message: string) => void) {
   const handleError = (error: unknown) => {
     const message = resolveErrorMessage(error);

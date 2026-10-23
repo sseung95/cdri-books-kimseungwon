@@ -13,7 +13,7 @@ function isBook(value: unknown): value is Book {
   );
 }
 
-// 찜한 시점의 책 데이터를 그대로 저장한다. (이후 API 데이터와 달라질 수 있음)
+/** 찜한 시점의 책 데이터를 그대로 저장한다. (이후 API 데이터와 달라질 수 있음) */
 const likedBooksStore = createLocalStorageStore<Book[]>(
   "liked-books",
   [],

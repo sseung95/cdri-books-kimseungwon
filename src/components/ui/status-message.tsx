@@ -16,7 +16,7 @@ interface StatusMessageProps {
   children?: ReactNode;
 }
 
-// 404, 오류처럼 페이지 전체 상태를 알리는 안내
+/** 404, 오류처럼 페이지 전체 상태를 알리는 안내 */
 export function StatusMessage({
   title,
   message,

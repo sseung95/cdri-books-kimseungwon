@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react";
 
-// 같은 탭 안의 변경은 storage 이벤트가 발생하지 않아서 직접 알린다.
+/** 같은 탭 안의 변경은 storage 이벤트가 발생하지 않아서 직접 알린다. */
 const CHANGE_EVENT = "local-storage-change";
 
 export interface LocalStorageStore<T> {
@@ -54,7 +54,7 @@ export function createLocalStorageStore<T>(
   return { get, set, subscribe, fallback };
 }
 
-// 서버 렌더링 때는 localStorage가 없으므로 기본값으로 그린다.
+/** 서버 렌더링 때는 localStorage가 없으므로 기본값으로 그린다. */
 export function useLocalStorageStore<T>(store: LocalStorageStore<T>) {
   return useSyncExternalStore(store.subscribe, store.get, () => store.fallback);
 }

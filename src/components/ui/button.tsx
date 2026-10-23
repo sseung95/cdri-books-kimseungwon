@@ -18,7 +18,7 @@ interface ButtonStyleProps {
   fullWidth?: boolean;
 }
 
-// Button과 LinkButton이 같은 모양을 쓰도록 공통 클래스를 만든다.
+/** Button과 LinkButton이 같은 모양을 쓰도록 공통 클래스를 만든다. */
 function buttonClassName({
   variant = "primary",
   size = "md",
@@ -60,7 +60,7 @@ export function Button({
 
 interface LinkButtonProps extends ComponentProps<"a">, ButtonStyleProps {}
 
-// 버튼 모양의 링크. 페이지 이동은 <button>이 아니라 <a>로 한다.
+/** 버튼 모양의 링크. 페이지 이동은 <button>이 아니라 <a>로 한다. */
 export function LinkButton({
   variant,
   size,

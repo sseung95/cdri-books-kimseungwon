@@ -5,7 +5,7 @@ interface BookListSkeletonProps {
   rows?: number;
 }
 
-// 접힌 리스트 아이템(BookSummary)과 같은 배치의 로딩 자리 표시
+/** 접힌 리스트 아이템(BookSummary)과 같은 배치의 로딩 자리 표시 */
 export function BookListSkeleton({ rows = 5 }: BookListSkeletonProps) {
   return (
     <ul aria-hidden>

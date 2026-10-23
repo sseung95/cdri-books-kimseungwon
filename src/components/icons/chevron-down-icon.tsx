@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-// 위쪽 화살표는 rotate-180으로 돌려서 쓴다.
+/** 위쪽 화살표는 rotate-180으로 돌려서 쓴다. */
 export function ChevronDownIcon(props: ComponentProps<"svg">) {
   return (
     <svg

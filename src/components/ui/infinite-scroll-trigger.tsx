@@ -6,8 +6,10 @@ interface InfiniteScrollTriggerProps {
   onIntersect: () => void;
 }
 
-// 목록 끝에 두는 감지용 요소. 화면에 들어오면 onIntersect를 호출한다.
-// 다음 페이지를 불러온 뒤에도 여전히 보이는 경우를 위해, 쓰는 쪽에서 key를 바꿔 다시 감지하게 한다.
+/**
+ * 목록 끝에 두는 감지용 요소. 화면에 들어오면 onIntersect를 호출한다.
+ * 다음 페이지를 불러온 뒤에도 여전히 보이는 경우를 위해, 쓰는 쪽에서 key를 바꿔 다시 감지하게 한다.
+ */
 export function InfiniteScrollTrigger({
   onIntersect,
 }: InfiniteScrollTriggerProps) {

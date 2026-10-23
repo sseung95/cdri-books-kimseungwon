@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
-// src/styles/typography.css의 typo-* 유틸리티와 동기화해야 한다.
+/** src/styles/typography.css의 typo-* 유틸리티와 동기화해야 한다. */
 const twMerge = extendTailwindMerge<"typo">({
   extend: {
     classGroups: {

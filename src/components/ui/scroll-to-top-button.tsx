@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@/components/icons/chevron-down-icon";
 import { cn } from "@/lib/cn";
 
-// 이만큼 내려가면 버튼을 보여준다.
+/** 이만큼 내려가면 버튼을 보여준다. */
 const SHOW_AFTER = 400;
 
 export function ScrollToTopButton() {

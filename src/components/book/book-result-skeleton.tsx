@@ -5,7 +5,7 @@ interface BookResultSkeletonProps {
   message?: string;
 }
 
-// BookResult(결과 수 + 목록)와 같은 배치의 로딩 자리 표시
+/** BookResult(결과 수 + 목록)와 같은 배치의 로딩 자리 표시 */
 export function BookResultSkeleton({
   message = "불러오는 중입니다",
 }: BookResultSkeletonProps) {

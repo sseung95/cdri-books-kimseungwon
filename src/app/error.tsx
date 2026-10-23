@@ -10,7 +10,7 @@ interface ErrorPageProps {
   retry: () => void;
 }
 
-// 화면을 그리다 예상하지 못한 오류가 났을 때 보여준다. (API 실패는 각 화면에서 따로 처리)
+/** 화면을 그리다 예상하지 못한 오류가 났을 때 보여준다. (API 실패는 각 화면에서 따로 처리) */
 export default function ErrorPage({ error, retry }: ErrorPageProps) {
   useEffect(() => {
     console.error(error);
