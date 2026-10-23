@@ -54,7 +54,7 @@ export function SearchBar({ query }: SearchBarProps) {
         )}
       >
         <form role="search" onSubmit={handleSubmit}>
-          <label className="flex h-12.5 items-center gap-2.75 px-2.5">
+          <label className="flex h-12.5 items-center gap-2.75 pr-5 pl-2.5">
             <SearchIcon className="shrink-0 text-text-primary" />
             <input
               name="query"
@@ -75,7 +75,7 @@ export function SearchBar({ query }: SearchBarProps) {
                 <button
                   type="button"
                   onClick={() => search(history)}
-                  className="w-full py-3 pr-14 pl-12.75 text-left typo-caption text-text-subtitle hover:bg-gray/40 focus-visible:bg-gray/40"
+                  className="w-full truncate py-2 pr-14 pl-12.75 text-left typo-caption leading-6 text-text-subtitle hover:bg-gray/40 focus-visible:bg-gray/40"
                 >
                   {history}
                 </button>
