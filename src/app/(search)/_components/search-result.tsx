@@ -2,6 +2,8 @@
 
 import { BookListSkeleton } from "@/components/book/book-list-skeleton";
 import { BookResult } from "@/components/book/book-result";
+import { Button } from "@/components/ui/button";
+import { InfiniteScrollTrigger } from "@/components/ui/infinite-scroll-trigger";
 import { useBookSearch } from "@/queries/book";
 
 interface SearchResultProps {
@@ -9,7 +11,15 @@ interface SearchResultProps {
 }
 
 export function SearchResult({ query }: SearchResultProps) {
-  const { data, isLoading, isError } = useBookSearch({ query });
+  const {
+    data,
+    isLoading,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    isFetchNextPageError,
+  } = useBookSearch({ query });
 
   if (isLoading) {
     return (
@@ -22,7 +32,8 @@ export function SearchResult({ query }: SearchResultProps) {
       </div>
     );
   }
-  if (isError) {
+  // 다음 페이지만 실패한 경우는 아래에서 다시 시도 버튼으로 처리한다.
+  if (isError && !isFetchNextPageError) {
     return (
       <SearchMessage>
         검색 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.
@@ -34,12 +45,32 @@ export function SearchResult({ query }: SearchResultProps) {
   const totalCount = data?.pages[0]?.meta.totalCount ?? 0;
 
   return (
-    <BookResult
-      label="도서 검색 결과"
-      books={books}
-      count={totalCount}
-      emptyMessage="검색된 결과가 없습니다."
-    />
+    <>
+      <BookResult
+        label="도서 검색 결과"
+        books={books}
+        count={totalCount}
+        emptyMessage="검색된 결과가 없습니다."
+      />
+      {isFetchingNextPage && <BookListSkeleton rows={2} />}
+      {isFetchNextPageError && (
+        <div className="flex flex-col items-center gap-3 py-10">
+          <p className="typo-body2 text-text-secondary">
+            목록을 더 불러오지 못했습니다.
+          </p>
+          <Button variant="outline" size="sm" onClick={() => fetchNextPage()}>
+            다시 시도
+          </Button>
+        </div>
+      )}
+      {hasNextPage && !isFetchingNextPage && !isFetchNextPageError && (
+        // 불러온 페이지 수가 바뀔 때마다 다시 감지해서, 목록이 짧아 감지 요소가 계속 보여도 이어서 불러온다.
+        <InfiniteScrollTrigger
+          key={data?.pages.length}
+          onIntersect={() => fetchNextPage()}
+        />
+      )}
+    </>
   );
 }
 

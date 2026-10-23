@@ -21,5 +21,7 @@ export function useBookSearch(filter: BookSearchFilter) {
     getNextPageParam: (lastPage, _allPages, lastPageParam) =>
       lastPage.meta.isEnd ? undefined : lastPageParam + 1,
     enabled: filter.query.trim().length > 0,
+    // 무한 쿼리는 다시 불러올 때 받아둔 페이지를 모두 다시 요청하므로 캐시를 길게 둔다.
+    staleTime: 5 * 60 * 1000,
   });
 }
