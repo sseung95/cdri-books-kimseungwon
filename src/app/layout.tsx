@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import { Container } from "@/components/layout/container";
 import { Header } from "@/components/layout/header";
+import { ScrollToTopButton } from "@/components/ui/scroll-to-top-button";
 import { QueryProvider } from "@/providers/query-provider";
 import "@/styles/globals.css";
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main className="pt-20 pb-20">
             <Container>{children}</Container>
           </main>
+          <ScrollToTopButton />
         </QueryProvider>
       </body>
     </html>
