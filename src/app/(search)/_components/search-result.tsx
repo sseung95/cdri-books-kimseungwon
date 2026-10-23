@@ -5,12 +5,14 @@ import { BookResult } from "@/components/book/book-result";
 import { Button } from "@/components/ui/button";
 import { InfiniteScrollTrigger } from "@/components/ui/infinite-scroll-trigger";
 import { useBookSearch } from "@/queries/book";
+import type { DetailTarget } from "../_lib/search-url";
 
 interface SearchResultProps {
   query: string;
+  target?: DetailTarget;
 }
 
-export function SearchResult({ query }: SearchResultProps) {
+export function SearchResult({ query, target }: SearchResultProps) {
   const {
     data,
     isLoading,
@@ -19,7 +21,7 @@ export function SearchResult({ query }: SearchResultProps) {
     fetchNextPage,
     isFetchingNextPage,
     isFetchNextPageError,
-  } = useBookSearch({ query });
+  } = useBookSearch({ query, target });
 
   if (isLoading) {
     return (
